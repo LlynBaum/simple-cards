@@ -36,7 +36,7 @@ const Index = () => {
                     setIsLoading(false);
                     return;
                 }
-                return getDecks()
+                return getDecks();
             })
             .catch(e => {
                 setIsLoading(false);
