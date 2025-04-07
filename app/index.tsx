@@ -1,5 +1,6 @@
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import {useCallback, useState} from "react";
+import {FAB} from 'react-native-paper';
 import {Deck} from "@/constants/Types";
 import {useFocusEffect} from "expo-router";
 import Loading from "@/components/Loading";
@@ -31,12 +32,20 @@ const Index = () => {
     }
 
     return (
-        <ScrollView>
-            <Text style={styles.title}>Hallo!</Text>
-            <View style={styles.container}>
-                {decks.map(d => <Text>{d.name}</Text>)}
-            </View>
-        </ScrollView>
+        <>
+            <ScrollView>
+                <Text style={styles.title}>Hallo!</Text>
+                <View style={styles.container}>
+                    {decks.map(d => <Text>{d.name}</Text>)}
+                </View>
+            </ScrollView>
+            <FAB
+                icon="plus"
+                style={styles.fab}
+                color="#21005D"
+                onPress={() => setDecks(p => [...p, { name: "Test" } as Deck])}
+            />
+        </>
     )
 }
 
@@ -51,6 +60,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         marginVertical: 20,
+    },
+    fab: {
+        position: "absolute",
+        right: 10,
+        bottom: 10,
+        margin: 16,
+        backgroundColor: "#EADDFF",
     }
 });
 
