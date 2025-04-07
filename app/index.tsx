@@ -2,19 +2,33 @@ import {ScrollView, StyleSheet, Text, View} from "react-native";
 import {useCallback, useState} from "react";
 import {Deck} from "@/constants/Types";
 import {useFocusEffect} from "expo-router";
+import Loading from "@/components/Loading";
 
 const Index = () => {
     const [decks, setDecks] = useState<Deck[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useFocusEffect(useCallback(() => {
+        setIsLoading(true);
         fetch("https://flashcard.darki.dev/api/decks")
             .then(res => res.json())
             .then(setDecks)
+            .then(() => setIsLoading(false))
             .catch(e => {
+                setIsLoading(false);
                 alert("There was a problem while loading the deck!");
                 console.error(e);
             });
     }, []));
+
+    if (isLoading) {
+        return (
+            <>
+                <Text style={styles.title}>Hallo!</Text>
+                <Loading/>
+            </>
+        )
+    }
 
     return (
         <ScrollView>
