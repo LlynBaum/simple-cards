@@ -11,7 +11,7 @@ const Index = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [showNewDeckDialog, setShowNewDeckDialog] = useState(false);
 
-    useFocusEffect(useCallback(() => {
+    const getDecks = useCallback(() => {
         setIsLoading(true);
         fetch("https://flashcard.darki.dev/api/decks")
             .then(res => res.json())
@@ -22,7 +22,30 @@ const Index = () => {
                 alert("There was a problem while loading the deck!");
                 console.error(e);
             });
-    }, []));
+    }, []);
+
+    const createDeck = useCallback((name: string) => {
+        setIsLoading(true);
+        fetch("https://flashcard.darki.dev/api/decks", {
+            method: "POST",
+            body: JSON.stringify({name: name})
+        })
+            .then(res => {
+                if(!res.ok){
+                    alert("There was a problem while creating the deck!");
+                    setIsLoading(false);
+                    return;
+                }
+                return getDecks()
+            })
+            .catch(e => {
+                setIsLoading(false);
+                alert("There was a problem while loading the decks!");
+                console.error(e);
+            })
+    }, []);
+
+    useFocusEffect(getDecks);
 
     if (isLoading) {
         return (
@@ -49,7 +72,7 @@ const Index = () => {
             />
             <NewDeckDialog
                 visible={showNewDeckDialog}
-                onConfirm={name => setDecks(p => [...p, {name: name} as Deck])}
+                onConfirm={createDeck}
                 onCancel={() => setShowNewDeckDialog(false)}/>
         </>
     )
