@@ -4,10 +4,12 @@ import {FAB} from 'react-native-paper';
 import {Deck} from "@/constants/Types";
 import {useFocusEffect} from "expo-router";
 import Loading from "@/components/Loading";
+import NewDeckDialog from "@/components/dialogs/NewDeckDialog";
 
 const Index = () => {
     const [decks, setDecks] = useState<Deck[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [showNewDeckDialog, setShowNewDeckDialog] = useState(false);
 
     useFocusEffect(useCallback(() => {
         setIsLoading(true);
@@ -43,8 +45,12 @@ const Index = () => {
                 icon="plus"
                 style={styles.fab}
                 color="#21005D"
-                onPress={() => setDecks(p => [...p, { name: "Test" } as Deck])}
+                onPress={() => setShowNewDeckDialog(true)}
             />
+            <NewDeckDialog
+                visible={showNewDeckDialog}
+                onConfirm={name => setDecks(p => [...p, {name: name} as Deck])}
+                onCancel={() => setShowNewDeckDialog(false)}/>
         </>
     )
 }
