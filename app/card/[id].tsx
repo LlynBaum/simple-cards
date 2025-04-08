@@ -34,6 +34,28 @@ const EditCard = () => {
         setCard(prev => ({...prev, back: text} as Card));
     }, []);
 
+    const onSave = () => {
+        setIsLoading(true);
+        fetch("https://flashcard.darki.dev/api/cards", {
+            method: "PUT",
+            body: JSON.stringify(card)
+        })
+            .then(res => {
+                setIsLoading(false);
+                if(res.ok){
+                    router.back();
+                }
+                else {
+                    alert("There was a problem while saving the Card!");
+                }
+            })
+            .catch(e => {
+                setIsLoading(false);
+                alert("There was a problem while saving the Card!");
+                console.error(e);
+            });
+    }
+
     if (isLoading) {
         return <Loading/>;
     }
@@ -63,7 +85,7 @@ const EditCard = () => {
                        onChangeText={onChangeBack}/>
             <View style={styles.buttons}>
                 <Button mode="contained" onPress={() => router.back()}>Cancel</Button>
-                <Button mode="contained" onPress={() => {}}>Save</Button>
+                <Button mode="contained" onPress={onSave}>Save</Button>
             </View>
         </View>
     )
