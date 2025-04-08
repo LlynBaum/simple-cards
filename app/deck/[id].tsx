@@ -43,14 +43,14 @@ const DeckScreen = () => {
             <ScrollView>
                 <View style={styles.container}>
                     {
-                        deck.cards.length > 0 && (
+                        deck.cards && deck.cards.length > 0 && (
                             <Button icon="school" mode="contained" style={styles.study}
                                     onPress={() => router.push(`/study/${id}`)}>
                                 Study
                             </Button>
                         )
                     }
-                    {deck.cards.map(card => <CardView card={card}/>)}
+                    {deck.cards && deck.cards.map(card => <CardView key={card.id} card={card}/>)}
                     <Button
                         icon="plus"
                         mode="contained"
