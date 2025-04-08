@@ -42,6 +42,14 @@ const DeckScreen = () => {
             <Stack.Screen options={{title: deck.name}}/>
             <ScrollView>
                 <View style={styles.container}>
+                    {
+                        deck.cards.length > 0 && (
+                            <Button icon="school" mode="contained" style={styles.study}
+                                    onPress={() => router.push(`/study/${id}`)}>
+                                Study
+                            </Button>
+                        )
+                    }
                     {deck.cards.map(card => <CardView card={card}/>)}
                     <Button
                         icon="plus"
@@ -69,6 +77,10 @@ const styles = StyleSheet.create({
         width: 100,
         alignSelf: "center"
     },
+    study: {
+        width: 100,
+        alignSelf: "center"
+    }
 });
 
 export default DeckScreen;
