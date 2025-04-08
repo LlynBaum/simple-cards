@@ -5,6 +5,7 @@ import Loading from "@/components/Loading";
 import {StyleSheet, Text, View} from "react-native";
 import {IconButton} from "react-native-paper";
 import {StudyDeck} from "@/components/study/StudyDeck";
+import {StudyResult} from "@/components/study/StudyResult";
 
 const shuffleArray = (array: Card[]) => {
     return array.sort(() => Math.random() - 0.5);
@@ -56,8 +57,10 @@ const StudyDeckScreen = () => {
                 <IconButton icon="close" iconColor="black" style={{alignSelf: "center"}} size={24} onPress={() => router.back()}/>
             </View>
             {
-                currentCardIndex <= deck.cards.length - 1 && (
+                currentCardIndex <= deck.cards.length - 1 ? (
                     <StudyDeck deck={deck} currentCardIndex={currentCardIndex} nextCard={handleNextCard}/>
+                ) : (
+                    <StudyResult deck={deck} correctCount={correctCount} />
                 )
             }
         </View>
