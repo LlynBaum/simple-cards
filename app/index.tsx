@@ -5,6 +5,7 @@ import {Deck} from "@/constants/Types";
 import {useFocusEffect} from "expo-router";
 import Loading from "@/components/Loading";
 import NewDeckDialog from "@/components/dialogs/NewDeckDialog";
+import DeckView from "@/components/DeckView";
 
 const Index = () => {
     const [decks, setDecks] = useState<Deck[]>([]);
@@ -61,7 +62,7 @@ const Index = () => {
             <ScrollView>
                 <Text style={styles.title}>Hallo!</Text>
                 <View style={styles.container}>
-                    {decks.map(d => <Text>{d.name}</Text>)}
+                    {decks.map(d => <DeckView key={d.id} deck={d} />)}
                 </View>
             </ScrollView>
             <FAB
