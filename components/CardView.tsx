@@ -27,6 +27,10 @@ const CardView = ({card}: { card: Card }) => {
             });
     }, [card.id]);
 
+    const onEdit = useCallback(() => {
+        router.push(`/card/${card.id}`);
+    }, [card.id]);
+
     return (
         <>
             <PaperCard style={{backgroundColor: "#FEF7FF", width: "80%", alignSelf: "center"}}>
@@ -34,8 +38,7 @@ const CardView = ({card}: { card: Card }) => {
                     style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                     <Text>{card.front}</Text>
                     <View style={{flexDirection: "row"}}>
-                        <IconButton icon="pencil" iconColor="black" style={styles.icon} onPress={() => {
-                        }}/>
+                        <IconButton icon="pencil" iconColor="black" style={styles.icon} onPress={onEdit}/>
                         <IconButton icon="delete" iconColor="black" style={styles.icon}
                                     onPress={() => setShowDeleteDialog(true)}/>
                     </View>
