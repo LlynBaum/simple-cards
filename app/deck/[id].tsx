@@ -3,6 +3,7 @@ import {useCallback, useState} from "react";
 import {Deck} from "@/constants/Types";
 import Loading from "@/components/Loading";
 import {ScrollView, StyleSheet, Text, View} from "react-native";
+import CardView from "@/components/CardView";
 
 const DeckScreen = () => {
     const {id} = useLocalSearchParams<{ id: string }>();
@@ -39,9 +40,7 @@ const DeckScreen = () => {
             <Stack.Screen options={{title: deck.name}}/>
             <ScrollView>
                 <View style={styles.container}>
-                    {deck.cards.map(card => (
-                        <Text>{card.front}</Text>
-                    ))}
+                    {deck.cards.map(card => <CardView card={card} />)}
                 </View>
             </ScrollView>
         </>
