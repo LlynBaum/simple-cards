@@ -11,7 +11,7 @@ const DeckView = ({deck}: { deck: Deck }) => {
 
     const onDelete = useCallback(() => {
         setShowDeleteDialog(false);
-        fetch("https://flashcard.darki.dev/api/decks", {
+        fetch("https://flashcard-backend-zeta.vercel.app/api/decks", {
             method: "DELETE",
             body: JSON.stringify({id: deck.id})
         })

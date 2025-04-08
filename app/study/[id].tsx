@@ -22,7 +22,7 @@ const StudyDeckScreen = () => {
 
     useFocusEffect(useCallback(() => {
         setIsLoading(true);
-        fetch(`https://flashcard.darki.dev/api/decks?id=${id}`)
+        fetch(`https://flashcard-backend-zeta.vercel.app/api/decks?id=${id}`)
             .then(res => res.json())
             .then((response: Deck) => {
                 const shuffledCards = shuffleArray(response.cards);

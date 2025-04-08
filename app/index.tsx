@@ -14,7 +14,7 @@ const Index = () => {
 
     const getDecks = useCallback(() => {
         setIsLoading(true);
-        fetch("https://flashcard.darki.dev/api/decks")
+        fetch("https://flashcard-backend-zeta.vercel.app/api/decks")
             .then(res => res.json())
             .then(setDecks)
             .then(() => setIsLoading(false))
@@ -28,7 +28,7 @@ const Index = () => {
     const createDeck = useCallback((name: string) => {
         setIsLoading(true);
         setShowNewDeckDialog(false);
-        fetch("https://flashcard.darki.dev/api/decks", {
+        fetch("https://flashcard-backend-zeta.vercel.app/api/decks", {
             method: "POST",
             body: JSON.stringify({name: name})
         })

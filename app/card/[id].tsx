@@ -14,7 +14,7 @@ const EditCard = () => {
 
     useFocusEffect(useCallback(() => {
         setIsLoading(true);
-        fetch(`https://flashcard.darki.dev/api/cards?id=${id}`)
+        fetch(`https://flashcard-backend-zeta.vercel.app/api/cards?id=${id}`)
             .then(res => {
                 if (!res.ok) {
                     alert("There was a problem while loading the Card!");
@@ -36,7 +36,7 @@ const EditCard = () => {
 
     const onSave = () => {
         setIsLoading(true);
-        fetch("https://flashcard.darki.dev/api/cards", {
+        fetch("https://flashcard-backend-zeta.vercel.app/api/cards", {
             method: "PUT",
             body: JSON.stringify(card)
         })

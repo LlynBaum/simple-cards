@@ -30,7 +30,7 @@ const New = () => {
 
     const onSave = () => {
         setIsLoading(true);
-        fetch("https://flashcard.darki.dev/api/cards", {
+        fetch("https://flashcard-backend-zeta.vercel.app/api/cards", {
             method: "POST",
             body: JSON.stringify(card)
         })
