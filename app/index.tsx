@@ -27,6 +27,7 @@ const Index = () => {
 
     const createDeck = useCallback((name: string) => {
         setIsLoading(true);
+        setShowNewDeckDialog(false);
         fetch("https://flashcard.darki.dev/api/decks", {
             method: "POST",
             body: JSON.stringify({name: name})
@@ -35,7 +36,6 @@ const Index = () => {
                 if(!res.ok){
                     alert("There was a problem while creating the deck!");
                     setIsLoading(false);
-                    return;
                 }
                 return getDecks();
             })

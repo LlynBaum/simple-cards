@@ -17,7 +17,6 @@ const CardView = ({card}: { card: Card }) => {
         }).then(res => {
             if(!res.ok){
                 alert("There was a problem while deleting the card!");
-                return;
             }
             router.push(`/deck/${card.deckId}`);
         })

@@ -18,7 +18,6 @@ const DeckView = ({deck}: { deck: Deck }) => {
             .then(res => {
                 if (!res.ok) {
                     alert("There was a problem while deleting the deck!");
-                    return;
                 }
                 router.replace("/");
             })
