@@ -2,10 +2,30 @@ import {Card} from "@/constants/Types";
 import {Card as PaperCard, IconButton} from "react-native-paper";
 import {StyleSheet, Text, View} from "react-native";
 import DeleteCardDialog from "@/components/dialogs/DeleteCardDialog";
-import {useState} from "react";
+import {useCallback, useState} from "react";
+import {useRouter} from "expo-router";
 
 const CardView = ({card}: { card: Card }) => {
+    const router = useRouter();
     const [showDeleteDialog, setShowDeleteDialog] = useState<boolean>(false);
+
+    const onDelete = useCallback(() => {
+        setShowDeleteDialog(false);
+        fetch("https://flashcard.darki.dev/api/cards", {
+            method: "DELETE",
+            body: JSON.stringify({id: card.id})
+        }).then(res => {
+            if(!res.ok){
+                alert("There was a problem while deleting the card!");
+                return;
+            }
+            router.push(`/deck/${card.deckId}`);
+        })
+            .catch(e => {
+                alert("There was a problem while deleting the card!");
+                console.error(e);
+            });
+    }, [card.id]);
 
     return (
         <>
@@ -25,8 +45,7 @@ const CardView = ({card}: { card: Card }) => {
                 visible={showDeleteDialog}
                 card={card}
                 onCancel={() => setShowDeleteDialog(false)}
-                onConfirm={() => {
-                }}
+                onConfirm={onDelete}
             />
         </>
     )
