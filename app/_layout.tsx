@@ -9,6 +9,7 @@ export default function RootLayout() {
                 <Stack.Screen name="index" options={{headerShown: false}}/>
                 <Stack.Screen name="deck/[id]" />
                 <Stack.Screen name="card/[id]" options={{headerShown: false}} />
+                <Stack.Screen name="card/new" options={{headerShown: false}}/>
             </Stack>
             <StatusBar style="auto"/>
         </>
