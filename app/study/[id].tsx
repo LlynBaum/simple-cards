@@ -45,7 +45,7 @@ const StudyDeckScreen = () => {
             setCorrectCount(i => i + 1);
         }
 
-        if (currentCardIndex <= deck!.cards.length - 1) {
+        if (currentCardIndex <= deck.cards.length - 1) {
             setCurrentCardIndex(i => i + 1);
         }
     };
@@ -57,11 +57,11 @@ const StudyDeckScreen = () => {
                 <IconButton icon="close" iconColor="black" style={{alignSelf: "center"}} size={24} onPress={() => router.back()}/>
             </View>
             {
-                currentCardIndex <= deck.cards.length - 1 ? (
+                deck.cards && (currentCardIndex <= deck.cards.length - 1 ? (
                     <StudyDeck deck={deck} currentCardIndex={currentCardIndex} nextCard={handleNextCard}/>
                 ) : (
                     <StudyResult deck={deck} correctCount={correctCount} />
-                )
+                ))
             }
         </View>
     );
