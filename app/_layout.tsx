@@ -38,11 +38,6 @@ async function scheduleDailyNotification() {
 
     await Notifications.cancelAllScheduledNotificationsAsync();
 
-    const trigger = new Date();
-    trigger.setHours(18);
-    trigger.setMinutes(0);
-    trigger.setSeconds(0);
-
     await Notifications.scheduleNotificationAsync({
         content: {
             title: "Already studied today?",
